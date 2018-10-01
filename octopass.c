@@ -450,7 +450,9 @@ void octopass_github_request(struct config *con, char *url, struct response *res
 
 int octopass_github_team_id(char *team_name, char *data)
 {
-   printf("inside octopass_github_team_id which does not get us the right id ...\n");
+   printf("inside octopass_github_team_id which does not get us the right id of %s ...\n",team_name);
+   printf("datadump:\n");
+   printf("%s\n",data);
   json_error_t error;
   json_t *teams = json_loads(data, 0, &error);
   json_t *team;
