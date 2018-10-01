@@ -75,6 +75,9 @@ enum nss_status _nss_octopass_setpwent_locked(int stayopen)
     syslog(LOG_INFO, "%s[L%d] -- stayopen: %d", __func__, __LINE__, stayopen);
   }
   int status = octopass_members(&con, &res);
+  
+  // debugging
+  printf("this is about the place when we fail, status:%d",status);
 
   if (status != 0) {
     free(res.data);
