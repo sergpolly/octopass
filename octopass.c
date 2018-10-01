@@ -450,6 +450,7 @@ void octopass_github_request(struct config *con, char *url, struct response *res
 
 int octopass_github_team_id(char *team_name, char *data)
 {
+   printf("inside octopass_github_team_id which does not get us the right id ...\n");
   json_error_t error;
   json_t *teams = json_loads(data, 0, &error);
   json_t *team;
@@ -458,6 +459,7 @@ int octopass_github_team_id(char *team_name, char *data)
   json_array_foreach(teams, i, team)
   {
     if (!json_is_object(team)) {
+       printf("seems like we're iterating i=%d, but never getting a match ...\n",i);
       continue;
     }
     const char *name = json_string_value(json_object_get(team, "name"));
