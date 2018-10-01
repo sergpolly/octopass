@@ -543,15 +543,21 @@ int octopass_team_members_by_team_id(struct config *con, int team_id, struct res
 
 int octopass_team_members(struct config *con, struct response *res)
 {
+   printf("Here we go - we're inside octopass_team_members - beginning\n");
+   
   int team_id = octopass_team_id(con);
   if (team_id == -1) {
     return -1;
   }
+   printf("inside octopass_team_members team_id acquired\n");
+   printf("team_id = %d",team_id);
 
   int status = octopass_team_members_by_team_id(con, team_id, res);
   if (status == -1) {
     return -1;
   }
+
+   printf("we never get here i guess ...\n");
 
   return 0;
 }
@@ -631,6 +637,7 @@ int octopass_members(struct config *con, struct response *res)
   if (strlen(con->repository) != 0) {
     return octopass_repository_collaborators(con, res);
   } else {
+     printf("hey from octopass_members function: team branch, not collabs one ...");
     return octopass_team_members(con, res);
   }
 }
