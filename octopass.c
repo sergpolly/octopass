@@ -464,13 +464,15 @@ int octopass_github_team_id(char *team_name, char *data)
        printf("seems like we're iterating i=%d, but never getting a match ...\n",i);
       continue;
     }
+    printf("are we iterating over teams ?%d\n",i);
     const char *name = json_string_value(json_object_get(team, "name"));
+    printf("are we iterating over teams ?%s\n",name);
     if (name != NULL && strcmp(team_name, name) == 0) {
       const json_int_t id = json_integer_value(json_object_get(team, "id"));
       return id;
     }
   }
-
+  // AAA!!! team name didn't match!!! who de fu gave a team name with complex formatting ?!
   return -1;
 }
 
