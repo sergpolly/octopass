@@ -136,6 +136,8 @@ int main(int argc, char **argv)
   // PASSWD
   if (strcmp(argv[1], "passwd") == 0) {
     if (argc < 3) {
+      // trying to debug https://github.com/linyows/octopass/issues/28
+      printf("\nHi there, I'm an innocent message printed by passwd cli without args\n\n");
       call_pwlist();
     } else {
       long id = atol(argv[2]);
