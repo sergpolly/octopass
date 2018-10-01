@@ -504,13 +504,18 @@ json_t *octopass_github_team_member_by_id(int gh_id, json_t *members)
 
 int octopass_team_id(struct config *con)
 {
+   
+   printf("just inside octopass_team_id - seems like it fails actually ...\n");
   char url[strlen(con->endpoint) + strlen(con->organization) + 64];
   sprintf(url, "%sorgs/%s/teams?per_page=100", con->endpoint, con->organization);
+   printf("url: %s\n",url);
 
   struct response res;
   octopass_github_request(con, url, &res);
+   printf("right after the request \n");
 
   if (!res.data) {
+    printf("right near the Request failure message\n");
     fprintf(stderr, "Request failure\n");
     if (con->syslog) {
       closelog();
@@ -518,7 +523,9 @@ int octopass_team_id(struct config *con)
     return -1;
   }
 
+    printf("about to get an id ...\n");
   int id = octopass_github_team_id(con->team, res.data);
+    printf(" id ... %d\n",id);
   free(res.data);
   return id;
 }
@@ -637,7 +644,7 @@ int octopass_members(struct config *con, struct response *res)
   if (strlen(con->repository) != 0) {
     return octopass_repository_collaborators(con, res);
   } else {
-     printf("hey from octopass_members function: team branch, not collabs one ...");
+     printf("hey from octopass_members function: team branch, not collabs one ...\n\n");
     return octopass_team_members(con, res);
   }
 }
